@@ -4,7 +4,7 @@ SetWorkingDir %A_ScriptDir%
 
 TargetImages := ["mytchcomp.png", "legend.png"]
 RerollButton := "reroll.png" 
-SleepDelay := 500
+SleepDelay := 50
 Confidence := 80 
 
 
