@@ -1,0 +1,2 @@
+# bgsi-competitive-meta
+autoroll 
