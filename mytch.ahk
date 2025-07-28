@@ -4,6 +4,8 @@ SetWorkingDir %A_ScriptDir%
 
 TargetImages := ["mytchcomp.png", "legend.png"]
 RerollButton := "reroll.png" 
+XButton := "x.png" 
+CompButton := "comp.png" 
 SleepDelay := 50
 Confidence := 80 
 
@@ -16,10 +18,49 @@ F1::
     Loop {
         RerollUntilTarget(RightRegion)
         RerollUntilTarget(LeftRegion)
+
+        ClickXButton()
+        Send, {w down}
+        Sleep, 500
+        Send, {w up}
+        
+        
+        Send, r
+        
+        Sleep, 30000
+        
+        Send, {s down}
+        Sleep, 500
+        Send, {s up}
+
+        Sleep, 2500
+        ClickCompButton()
     }
 Return
 
 B::ExitApp 
+
+ClickXButton() {
+    global XButton, Confidence
+    CoordMode, Pixel, Screen
+    ImageSearch, FoundX, FoundY, 0, 0, A_ScreenWidth, A_ScreenHeight, *%Confidence% %XButton%
+    if (ErrorLevel = 0) {
+        Click, % (FoundX + 20) . "," . (FoundY + 20)
+        Sleep, 500
+        MouseMove, FoundX, FoundY-50, 2
+    }
+}
+
+ClickCompButton() {
+    global CompButton, Confidence
+    CoordMode, Pixel, Screen
+    ImageSearch, FoundX, FoundY, 0, 0, A_ScreenWidth, A_ScreenHeight, *%Confidence% %CompButton%
+    if (ErrorLevel = 0) {
+        Click, %FoundX%, %FoundY%
+        Sleep, 500
+    }
+}
+
 
 
 RerollUntilTarget(region) {
